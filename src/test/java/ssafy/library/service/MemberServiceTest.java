@@ -12,6 +12,8 @@ import ssafy.library.domain.Member;
 import ssafy.library.exception.*;
 import ssafy.library.repository.MemberRepository;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -112,4 +114,46 @@ class MemberServiceTest {
 
     }
 
+    @Test
+    public void 회원전체조회_성공() throws Exception {
+
+        // given
+        Address address1 = new Address("123", "광주광역시", "엘리시아 306호");
+        Member member1 = new Member(null, "BAE", "981128", "01071852569", "byh9811@naver.com", address1);
+
+        Address address2 = new Address("456", "광주광역시", "엘리시아 307호");
+        Member member2 = new Member(null, "BAE", "981128", "11", "byh1128@naver.com", address2);
+
+        // when
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+        List<Member> members = memberService.findMembers();
+
+        // then
+        assertThat(members.size()).isEqualTo(2);
+
+    }
+
+    @Test
+    public void 회원이름조회_성공() throws Exception {
+
+        // given
+        Address address1 = new Address("123", "광주광역시", "엘리시아 306호");
+        Member member1 = new Member(null, "BAE", "981128", "01071852569", "byh9811@naver.com", address1);
+
+        Address address2 = new Address("456", "광주광역시", "엘리시아 307호");
+        Member member2 = new Member(null, "BAE", "981128", "11", "byh1128@naver.com", address2);
+
+        Address address3 = new Address("123", "광주광역시", "엘리시아 306호");
+        Member member3 = new Member(null, "SONG", "123456", "22", "byh9811@daum.com", address3);
+
+        // when
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+        memberRepository.save(member3);
+        List<Member> findMembers = memberService.findMembersByName("BAE");
+
+        // then
+        assertThat(findMembers.size()).isEqualTo(2);
+    }
 }

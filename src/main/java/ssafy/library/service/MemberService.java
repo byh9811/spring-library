@@ -7,6 +7,8 @@ import ssafy.library.domain.Member;
 import ssafy.library.repository.MemberRepository;
 import ssafy.library.util.*;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -23,6 +25,14 @@ public class MemberService {
         validate(member);
 
         return memberRepository.save(member);
+    }
+
+    public List<Member> findMembers() {
+        return memberRepository.findMembers();
+    }
+
+    public List<Member> findMembersByName(String name) {
+        return memberRepository.findByName(name);
     }
 
     private void validate(Member member) {
