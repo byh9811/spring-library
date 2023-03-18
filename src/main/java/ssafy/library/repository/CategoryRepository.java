@@ -27,4 +27,9 @@ public class CategoryRepository {
                 .setParameter("name", name)
                 .getResultList();
     }
+
+    public List<Category> findAll() {
+        return em.createQuery("select c from Category c", Category.class)
+                .getResultList();
+    }
 }

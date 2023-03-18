@@ -27,6 +27,10 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
+    }
+
     private void validate(Category category) {
         nullExistExceptionChecker.check(category);
         dataOutOfRangeExceptionChecker.check(category);
