@@ -58,6 +58,10 @@ public class MemberService {
         member.updateAddress(address);
     }
 
+    public Long quit(Long id) {
+        return memberRepository.delete(id);
+    }
+
     private void validate(Member member) {
         nullExistExceptionChecker.check(member);
         dataOutOfRangeExceptionChecker.check(member);

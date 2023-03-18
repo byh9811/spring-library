@@ -235,4 +235,18 @@ class MemberServiceTest {
 
     }
 
+    @Test
+    public void 회원탈퇴_성공() throws Exception {
+
+        // given
+        Address address = new Address("123", "광주광역시", "엘리시아 306호");
+        Member member = new Member(null, "BAE", "981128", "01071852569", "byh9811@naver.com", address);
+
+        // when
+        Long saveId = memberService.join(member);
+        Long removeId = memberService.quit(member.getId());
+
+        // then
+        assertThat(removeId).isEqualTo(saveId);
+    }
 }
