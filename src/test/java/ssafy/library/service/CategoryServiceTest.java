@@ -13,6 +13,7 @@ import ssafy.library.repository.CategoryRepository;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -94,7 +95,23 @@ class CategoryServiceTest {
         List<Category> categories = categoryService.getAllCategories();
 
         // then
-        Assertions.assertThat(categories.size()).isEqualTo(3);
+        assertThat(categories.size()).isEqualTo(3);
+
+    }
+
+    @Test
+    public void 카테고리이름수정_성공() throws Exception {
+
+        // given
+        Category category = new Category(null, "문학");
+
+        // when
+        categoryService.updateName(category, "과학");
+        categoryRepository.save(category);
+
+        // then
+        Category updatedCategory = categoryRepository.findById(1L);
+        assertThat(updatedCategory.getName()).isEqualTo("과학");
 
     }
 

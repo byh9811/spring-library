@@ -31,6 +31,11 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+    public void updateName(Category category, String name) {
+        validate(category);
+        category.updateName(name);
+    }
+
     private void validate(Category category) {
         nullExistExceptionChecker.check(category);
         dataOutOfRangeExceptionChecker.check(category);
