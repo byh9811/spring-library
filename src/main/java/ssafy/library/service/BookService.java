@@ -18,4 +18,15 @@ public class BookService {
         return bookRepository.save(book);
     }
 
+    public List<Book> findAll() {
+        return bookRepository.findAll();
+    }
+
+    public List<Book> find(BookSearch bookSearch) {
+        return bookRepository.findByCriteria(bookSearch);
+    }
+
+    public String delete(String id) {
+        return bookRepository.remove(id);
+    }
 }
