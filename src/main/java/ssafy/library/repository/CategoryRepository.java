@@ -32,4 +32,11 @@ public class CategoryRepository {
         return em.createQuery("select c from Category c", Category.class)
                 .getResultList();
     }
+
+    public Long delete(Long id) {
+        Category category = findById(id);
+        em.remove(category);
+        return category.getCategory_id();
+    }
+
 }

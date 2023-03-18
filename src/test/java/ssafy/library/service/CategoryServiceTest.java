@@ -115,4 +115,19 @@ class CategoryServiceTest {
 
     }
 
+    @Test
+    public void 카테고리삭제_성공() throws Exception {
+
+        // given
+        Category category = new Category(null, "문학");
+
+        // when
+        Long saveId = categoryRepository.save(category);
+        Long deleteId = categoryRepository.delete(category.getCategory_id());
+
+        // then
+        assertThat(saveId).isEqualTo(deleteId);
+
+    }
+
 }

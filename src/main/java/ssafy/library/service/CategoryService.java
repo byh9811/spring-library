@@ -36,6 +36,10 @@ public class CategoryService {
         category.updateName(name);
     }
 
+    public Long remove(Long id) {
+        return categoryRepository.delete(id);
+    }
+
     private void validate(Category category) {
         nullExistExceptionChecker.check(category);
         dataOutOfRangeExceptionChecker.check(category);
