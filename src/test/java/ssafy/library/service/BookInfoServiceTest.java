@@ -168,4 +168,22 @@ class BookInfoServiceTest {
         // then
         assertThat(bookInfoList.size()).isEqualTo(1);
     }
+
+    @Test
+    public void 도서정보삭제_성공() throws Exception {
+
+        // given
+        Category category = new Category(null, "문학");
+        BookInfo bookInfo = new BookInfo("1".repeat(13), category, "남궁성", "자바의 정석", "도우출판", LocalDateTime.now());
+
+        em.persist(category);
+
+        String savedIsbn = bookInfoService.add(bookInfo);
+
+        // when
+        String removedIsbn = bookInfoRepository.remove(savedIsbn);
+
+        // then
+        assertThat(savedIsbn).isEqualTo(removedIsbn);
+    }
 }

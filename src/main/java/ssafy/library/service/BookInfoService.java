@@ -35,6 +35,10 @@ public class BookInfoService {
         return bookInfoRepository.findByCriteria(bookInfoSearch);
     }
 
+    public String delete(String isbn) {
+        return bookInfoRepository.remove(isbn);
+    }
+
     private void validate(BookInfo bookInfo) {
         nullExistExceptionChecker.check(bookInfo);
         dataOutOfRangeExceptionChecker.check(bookInfo);

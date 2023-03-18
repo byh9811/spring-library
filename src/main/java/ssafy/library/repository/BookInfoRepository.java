@@ -24,6 +24,12 @@ public class BookInfoRepository {
         return bookInfo.getIsbn();
     }
 
+    public String remove(String isbn) {
+        BookInfo info = em.find(BookInfo.class, isbn);
+        em.remove(info);
+        return info.getIsbn();
+    }
+
     public List<BookInfo> findByName(String name) {
         return em.createQuery("select b from BookInfo b where b.name=:name", BookInfo.class)
                 .setParameter("name", name)
@@ -78,4 +84,5 @@ public class BookInfoRepository {
 
         return query.getResultList();
     }
+
 }
