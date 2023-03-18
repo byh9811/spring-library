@@ -28,4 +28,16 @@ public class Member {
 
     @Embedded
     private Address address;
+
+    public void updatePhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void updateEmail(String email) {
+        this.email = email;
+    }
+
+    public void updateAddress(Address address) {
+        this.address = address;
+    }
 }

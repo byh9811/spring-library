@@ -19,13 +19,13 @@ public class DuplicateExceptionChecker {
         checkEmail(member.getEmail());
     }
 
-    private void checkPhone(String phone) {
+    public void checkPhone(String phone) {
         List<Member> memberList = memberRepository.findByPhone(phone);
         if(!memberList.isEmpty())
             throw new DuplicateException("핸드폰 번호가 중복됩니다!");
     }
 
-    private void checkEmail(String email) {
+    public void checkEmail(String email) {
         List<Member> memberList = memberRepository.findByEmail(email);
         if(!memberList.isEmpty())
             throw new DuplicateException("이메일이 중복됩니다!");

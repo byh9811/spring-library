@@ -1,11 +1,8 @@
 package ssafy.library.service;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import ssafy.library.domain.Address;
 import ssafy.library.domain.Member;
@@ -156,4 +153,86 @@ class MemberServiceTest {
         // then
         assertThat(findMembers.size()).isEqualTo(2);
     }
+
+    @Test
+    public void 회원이메일수정_성공() throws Exception {
+
+        // given
+        Address address = new Address("123", "광주광역시", "엘리시아 306호");
+        Member member = new Member(null, "BAE", "981128", "01071852569", "byh9811@naver.com", address);
+
+        // when
+        memberService.updateEmail(member, "byh1128@naver.com");
+        memberRepository.save(member);
+
+        // then
+        Member savedMember = memberRepository.findById(1L);
+        assertThat(savedMember.getEmail()).isEqualTo("byh1128@naver.com");
+    }
+    
+    @Test
+    public void 회원연락처수정_성공() throws Exception {
+        // given
+        Address address = new Address("123", "광주광역시", "엘리시아 306호");
+        Member member = new Member(null, "BAE", "981128", "01071852569", "byh9811@naver.com", address);
+
+        // when
+        memberService.updatePhone(member, "01071850000");
+        memberRepository.save(member);
+
+        // then
+        Member savedMember = memberRepository.findById(1L);
+        assertThat(savedMember.getPhone()).isEqualTo("01071850000");
+    }
+    
+    @Test
+    public void 회원주소수정_성공() throws Exception {
+        // given
+        Address address = new Address("123", "광주광역시", "엘리시아 306호");
+        Member member = new Member(null, "BAE", "981128", "01071852569", "byh9811@naver.com", address);
+
+        // when
+        Address newAddress = new Address("456", "서울특별시", "노원구");
+        memberService.updateAddress(member, newAddress);
+        memberRepository.save(member);
+
+        // then
+        Member savedMember = memberRepository.findById(1L);
+        assertThat(savedMember.getAddress()).isEqualTo(newAddress);
+    }
+
+    @Test
+    public void 회원연락처수정_실패() throws Exception {
+
+        // given
+        Address address1 = new Address("123", "광주광역시", "엘리시아 306호");
+        Member member1 = new Member(null, "BAE", "981128", "01071852569", "byh9811@naver.com", address1);
+
+        Address address2 = new Address("456", "광주광역시", "엘리시아 307호");
+        Member member2 = new Member(null, "BAE", "981128", "11", "byh1128@naver.com", address2);
+
+        // when & then
+        assertThrows(DuplicateException.class, () -> {
+            memberRepository.save(member1);
+            memberRepository.save(member2);
+            memberService.updatePhone(member1, "11");
+        });
+
+    }
+
+    @Test
+    public void 회원이메일수정_실패() throws Exception {
+
+        // given
+        Address address = new Address("123", "광주광역시", "엘리시아 306호");
+        Member member = new Member(null, "BAE", "981128", "01071852569", "byh9811@naver.com", address);
+
+        // when & then
+        assertThrows(EmailFormatException.class, () -> {
+            memberService.updateEmail(member, "byh1128.com");
+            memberRepository.save(member);
+        });
+
+    }
+
 }
