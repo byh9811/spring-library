@@ -2,8 +2,10 @@ package ssafy.library.util;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import ssafy.library.domain.Category;
 import ssafy.library.domain.Member;
 import ssafy.library.exception.DuplicateException;
+import ssafy.library.repository.CategoryRepository;
 import ssafy.library.repository.MemberRepository;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.List;
 public class DuplicateExceptionChecker {
 
     private final MemberRepository memberRepository;
+    private final CategoryRepository categoryRepository;
 
     public void check(Member member) {
         checkPhone(member.getPhone());
@@ -30,4 +33,11 @@ public class DuplicateExceptionChecker {
         if(!memberList.isEmpty())
             throw new DuplicateException("이메일이 중복됩니다!");
     }
+
+    public void check(Category category) {
+        List<Category> categoryList = categoryRepository.findByName(category.getName());
+        if(!categoryList.isEmpty())
+            throw new DuplicateException("도서분류명이 중복됩니다!");
+    }
+
 }

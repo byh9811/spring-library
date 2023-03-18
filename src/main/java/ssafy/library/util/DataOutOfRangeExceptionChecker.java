@@ -2,6 +2,7 @@ package ssafy.library.util;
 
 import org.springframework.stereotype.Component;
 import ssafy.library.domain.Address;
+import ssafy.library.domain.Category;
 import ssafy.library.domain.Member;
 import ssafy.library.exception.DataOutOfRangeException;
 
@@ -24,4 +25,10 @@ public class DataOutOfRangeExceptionChecker {
                 address.getSub_address().length()>255)
             throw new DataOutOfRangeException("데이터가 범위를 벗어났습니다!");
     }
+
+    public void check(Category category) {
+        if(category.getName().length()>255)
+            throw new DataOutOfRangeException("데이터가 범위를 벗어났습니다!");
+    }
+
 }
