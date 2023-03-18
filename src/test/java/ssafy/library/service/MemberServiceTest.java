@@ -163,10 +163,10 @@ class MemberServiceTest {
 
         // when
         memberService.updateEmail(member, "byh1128@naver.com");
-        memberRepository.save(member);
+        Long saveId = memberRepository.save(member);
 
         // then
-        Member savedMember = memberRepository.findById(1L);
+        Member savedMember = memberRepository.findById(saveId);
         assertThat(savedMember.getEmail()).isEqualTo("byh1128@naver.com");
     }
     
@@ -178,10 +178,10 @@ class MemberServiceTest {
 
         // when
         memberService.updatePhone(member, "01071850000");
-        memberRepository.save(member);
+        Long saveId = memberRepository.save(member);
 
         // then
-        Member savedMember = memberRepository.findById(1L);
+        Member savedMember = memberRepository.findById(saveId);
         assertThat(savedMember.getPhone()).isEqualTo("01071850000");
     }
     
@@ -194,10 +194,10 @@ class MemberServiceTest {
         // when
         Address newAddress = new Address("456", "서울특별시", "노원구");
         memberService.updateAddress(member, newAddress);
-        memberRepository.save(member);
+        Long saveId = memberRepository.save(member);
 
         // then
-        Member savedMember = memberRepository.findById(1L);
+        Member savedMember = memberRepository.findById(saveId);
         assertThat(savedMember.getAddress()).isEqualTo(newAddress);
     }
 

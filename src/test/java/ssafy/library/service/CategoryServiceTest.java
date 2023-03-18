@@ -107,10 +107,10 @@ class CategoryServiceTest {
 
         // when
         categoryService.updateName(category, "과학");
-        categoryRepository.save(category);
+        Long saveId = categoryRepository.save(category);
 
         // then
-        Category updatedCategory = categoryRepository.findById(1L);
+        Category updatedCategory = categoryRepository.findById(saveId);
         assertThat(updatedCategory.getName()).isEqualTo("과학");
 
     }
