@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
@@ -16,17 +17,23 @@ public class Member {
     @Id
     @GeneratedValue
     @Column(name = "member_id")
+    @NotNull
     private Long id;
 
+    @NotNull
     private String name;
 
+    @NotNull
     private String birth;
 
+    @NotNull
     private String phone;
 
+    @NotNull
     private String email;
 
     @Embedded
+    @NotNull
     private Address address;
 
     public void updatePhone(String phone) {
