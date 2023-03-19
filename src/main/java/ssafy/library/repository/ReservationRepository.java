@@ -1,0 +1,22 @@
+package ssafy.library.repository;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
+import ssafy.library.domain.Member;
+import ssafy.library.domain.Reservation;
+
+import javax.persistence.EntityManager;
+import java.util.List;
+
+@Repository
+@RequiredArgsConstructor
+public class ReservationRepository {
+
+    private final EntityManager em;
+
+    public Long save(Reservation reservation) {
+        em.persist(reservation);
+        return reservation.getId();
+    }
+
+}

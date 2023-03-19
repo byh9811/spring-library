@@ -25,4 +25,8 @@ public class Book {
     @Enumerated(EnumType.STRING)
     @NotNull
     private BookStatus status;
+
+    public void setStatus(BookStatus status) {
+        this.status = status;
+    }
 }

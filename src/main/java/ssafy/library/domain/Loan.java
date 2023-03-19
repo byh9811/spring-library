@@ -55,6 +55,7 @@ public class Loan {
             throw new ReservationException("예약 도서는 대출이 불가합니다!");
         }
 
+        book.setStatus(BookStatus.LOAN);
         this.book = book;
     }
 
