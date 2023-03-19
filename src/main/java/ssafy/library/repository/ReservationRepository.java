@@ -19,4 +19,18 @@ public class ReservationRepository {
         return reservation.getId();
     }
 
+    public Reservation findById(Long id) {
+        return em.find(Reservation.class, id);
+    }
+
+    public List<Reservation> findAll() {
+        return em.createQuery("select r from Reservation r", Reservation.class)
+                .getResultList();
+    }
+
+    public List<Reservation> findByMemberId(Member member) {
+        return em.createQuery("select r from Reservation r where r.member=:member", Reservation.class)
+                .setParameter("member", member)
+                .getResultList();
+    }
 }

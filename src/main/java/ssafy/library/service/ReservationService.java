@@ -9,6 +9,8 @@ import ssafy.library.repository.BookRepository;
 import ssafy.library.repository.MemberRepository;
 import ssafy.library.repository.ReservationRepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ReservationService {
@@ -22,5 +24,18 @@ public class ReservationService {
         Member member = memberRepository.findById(memberId);
         Book book = bookRepository.findById(bookId);
         return reservationRepository.save(Reservation.createReservation(member, book));
+    }
+
+    public List<Reservation> findAllReservation() {
+        return reservationRepository.findAll();
+    }
+
+    public Reservation findReservation(Long id) {
+        return reservationRepository.findById(id);
+    }
+
+    public List<Reservation> findMyReservation(Long memberId) {
+        Member member = memberRepository.findById(memberId);
+        return reservationRepository.findByMemberId(member);
     }
 }
