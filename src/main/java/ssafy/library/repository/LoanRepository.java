@@ -16,4 +16,8 @@ public class LoanRepository {
         em.persist(loan);
         return loan.getId();
     }
+
+    public Loan findById(Long id) {
+        return em.find(Loan.class, id);
+    }
 }

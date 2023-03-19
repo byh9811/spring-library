@@ -66,4 +66,9 @@ public class Loan {
         this.member = member;
         member.getLoanList().add(this);
     }
+
+    public Long returnBook() {
+        this.status = LoanStatus.RETURN;
+        return this.id;
+    }
 }

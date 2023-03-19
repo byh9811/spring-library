@@ -27,5 +27,8 @@ public class LoanService {
 
         return loanRepository.save(loan);
     }
-    
+
+    public Long returnBook(Long loan_id) {
+        return loanRepository.findById(loan_id).returnBook();
+    }
 }
