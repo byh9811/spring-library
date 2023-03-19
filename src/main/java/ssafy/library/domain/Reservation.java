@@ -39,4 +39,8 @@ public class Reservation {
         reservation.reservationDate = LocalDateTime.now();
         return reservation;
     }
+
+    public void cancelReservation() {
+        book.setStatus(BookStatus.NONE);
+    }
 }

@@ -38,4 +38,8 @@ public class ReservationService {
         Member member = memberRepository.findById(memberId);
         return reservationRepository.findByMemberId(member);
     }
+
+    public Long cancel(Long reservationId) {
+        return reservationRepository.remove(reservationId);
+    }
 }

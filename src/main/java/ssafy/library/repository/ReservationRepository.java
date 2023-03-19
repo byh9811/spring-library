@@ -19,6 +19,12 @@ public class ReservationRepository {
         return reservation.getId();
     }
 
+    public Long remove(Long id) {
+        Reservation reservation = em.find(Reservation.class, id);
+        em.remove(reservation);
+        return id;
+    }
+
     public Reservation findById(Long id) {
         return em.find(Reservation.class, id);
     }
@@ -33,4 +39,5 @@ public class ReservationRepository {
                 .setParameter("member", member)
                 .getResultList();
     }
+
 }

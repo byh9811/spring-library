@@ -138,4 +138,29 @@ class ReservationServiceTest {
         assertEquals(savedReservation, reservation);
 
     }
+
+    @Test
+    public void 예약취소_성공() throws Exception {
+
+        // given
+        Address address = new Address("123", "광주광역시", "엘리시아 306호");
+        Member member = new Member(null, "BAE", "981128", "01071852569", "byh9811@naver.com", address);
+        Long memberId = memberRepository.save(member);
+
+        Category category = new Category(null, "문학");
+        em.persist(category);
+        BookInfo bookInfo = new BookInfo("1".repeat(13), category, "남궁성", "자바의 정석", "도우출판", LocalDateTime.now());
+        em.persist(bookInfo);
+        Book book = new Book("abcde12345", bookInfo, BookStatus.NONE);
+        String bookId = bookRepository.save(book);
+        Long reservedId = reservationService.reserve(memberId, bookId);
+
+        // when
+        Long canceledId = reservationService.cancel(reservedId);
+
+        // then
+        assertEquals(canceledId, reservedId);
+
+    }
+
 }
