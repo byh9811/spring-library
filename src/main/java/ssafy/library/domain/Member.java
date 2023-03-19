@@ -7,11 +7,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 public class Member {
 
     @Id
@@ -35,6 +36,18 @@ public class Member {
     @Embedded
     @NotNull
     private Address address;
+
+    @OneToMany(mappedBy = "member")
+    private List<Loan> loanList = new ArrayList<>();
+
+    public Member(Long id, String name, String birth, String phone, String email, Address address) {
+        this.id = id;
+        this.name = name;
+        this.birth = birth;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+    }
 
     public void updatePhone(String phone) {
         this.phone = phone;

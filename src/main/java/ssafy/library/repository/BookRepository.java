@@ -28,6 +28,10 @@ public class BookRepository {
         return book_id;
     }
 
+    public Book findById(String id) {
+        return em.find(Book.class, id);
+    }
+
     public List<Book> findAll() {
         return em.createQuery("select b from Book b", Book.class).getResultList();
     }
