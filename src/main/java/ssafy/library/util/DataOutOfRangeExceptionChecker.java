@@ -1,10 +1,7 @@
 package ssafy.library.util;
 
 import org.springframework.stereotype.Component;
-import ssafy.library.domain.Address;
-import ssafy.library.domain.BookInfo;
-import ssafy.library.domain.Category;
-import ssafy.library.domain.Member;
+import ssafy.library.domain.*;
 import ssafy.library.exception.DataOutOfRangeException;
 
 @Component
@@ -40,4 +37,8 @@ public class DataOutOfRangeExceptionChecker {
             throw new DataOutOfRangeException("데이터가 범위를 벗어났습니다!");
     }
 
+    public void check(Book book) {
+        if(book.getBook_id().length()>10)
+            throw new DataOutOfRangeException("데이터가 범위를 벗어났습니다!");
+    }
 }

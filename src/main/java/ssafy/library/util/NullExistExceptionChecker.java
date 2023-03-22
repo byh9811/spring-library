@@ -1,10 +1,7 @@
 package ssafy.library.util;
 
 import org.springframework.stereotype.Component;
-import ssafy.library.domain.Address;
-import ssafy.library.domain.BookInfo;
-import ssafy.library.domain.Category;
-import ssafy.library.domain.Member;
+import ssafy.library.domain.*;
 import ssafy.library.exception.NullExistException;
 
 @Component
@@ -41,4 +38,9 @@ public class NullExistExceptionChecker {
             throw new NullExistException("필드에 null이 존재합니다!");
     }
 
+    public void check(Book book) {
+        if(book.getBookInfo()==null ||
+                book.getStatus()==null)
+            throw new NullExistException("필드에 null이 존재합니다!");
+    }
 }
