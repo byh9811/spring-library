@@ -16,19 +16,13 @@ public class LoanService {
     private final MemberRepository memberRepository;
     private final BookRepository bookRepository;
 
-    private final NullExistExceptionChecker nullExistExceptionChecker;
-    private final DataOutOfRangeExceptionChecker dataOutOfRangeExceptionChecker;
-    private final DuplicateExceptionChecker duplicateExceptionChecker;
-    private final DateExceptionChecker dateExceptionChecker;
-    private final EmailFormatExceptionChecker emailFormatExceptionChecker;
-
     public Long checkout(Long memberId, String bookId) {
         Loan loan = Loan.createLoan(memberRepository.findById(memberId), bookRepository.findById(bookId));
-
         return loanRepository.save(loan);
     }
 
     public Long returnBook(Long loan_id) {
         return loanRepository.findById(loan_id).returnBook();
     }
+
 }
